@@ -1,6 +1,9 @@
 package com.example.Back.Model.Dto;
 
-public class LoginRequest {
+import com.example.Back.Model.Entity.Users;
+
+public class Log {
+
     private String username;
     private String password;
 
