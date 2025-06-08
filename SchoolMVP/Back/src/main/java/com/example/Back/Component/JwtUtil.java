@@ -18,8 +18,6 @@ import java.util.stream.DoubleStream;
 public class JwtUtil {
 
     private final String secretKeyBase64 = "aGZpd2hmaWhkaXNoZWlzaHJpd2ZiamRic2plaHVpcmh1aWRzbmZqcWVpaGZxZGY=";
-
-    //role madkhlach f m3a jwt khask t9adha
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
 
@@ -29,7 +27,9 @@ public class JwtUtil {
                 .collect(Collectors.toList());
 
         claims.put("roles", roles);
-
+        System.out.println("Generating token for: " + userDetails.getUsername());
+        System.out.println("Authorities: " + userDetails.getAuthorities());
+        System.out.println("User roles: " + roles);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())

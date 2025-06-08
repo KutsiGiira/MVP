@@ -4,6 +4,8 @@ import com.example.Back.Component.JwtFilter;
 import com.example.Back.Services.CusUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -24,16 +26,20 @@ public class Configuration {
                         .csrf(c -> c.disable())
                         .authorizeHttpRequests(req -> req
                             .requestMatchers("/new-user", "/login").permitAll()
-                                .requestMatchers("/admins/**").hasAuthority("ADMIN")
-                                .requestMatchers("/teachers/**").hasAuthority("TEACHER")
-                                .requestMatchers("/parents/**").hasAuthority("PARENT")
+                                .requestMatchers("/admins/**").hasRole("ADMIN")
+                                .requestMatchers("/teachers/**").hasRole("TEACHER")
+                                .requestMatchers("/parents/**").hasRole("PARENT")
                                 .anyRequest().authenticated())
-                                .userDetailsService(userDetailsService)
+//                                .userDetailsService(userDetailsService) fach t9ad login page 7yd commnt
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder(12);
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 }

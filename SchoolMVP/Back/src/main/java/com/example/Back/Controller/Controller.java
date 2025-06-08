@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +28,8 @@ public class Controller {
     LoginService loginService;
     @Autowired
     JwtUtil jwtutil;
+    @Autowired
+     AuthenticationManager authenticationManager;
     private UsersRepo usersRepo;
     private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(12);
 
@@ -59,17 +65,19 @@ public class Controller {
         return ResponseEntity.ok("Registred Successfully");
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Log log){
+    public ResponseEntity<String> login(@RequestBody Log log) {
         try {
-            Users user = loginService.Verify(log.getUsername());
-            if (!encoder.matches(log.getPassword(), user.getPassword()))
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong creds");
-            String token = jwtutil.generateToken((UserDetails) user);
-            System.out.println(token);
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(log.getUsername(), log.getPassword())
+            );
+
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            String token = jwtutil.generateToken(userDetails);
+
             return ResponseEntity.ok(token);
-        }
-        catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong creds");
         }
     }
 }
