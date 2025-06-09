@@ -12,10 +12,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @org.springframework.context.annotation.Configuration
 @EnableWebSecurity
-public class Configuration {
+public class Configuration implements WebMvcConfigurer {
     @Autowired
     JwtFilter jwtFilter;
     @Autowired
@@ -33,6 +35,14 @@ public class Configuration {
 //                                .userDetailsService(userDetailsService) fach t9ad login page 7yd commnt
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+    }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+//                .allowedOrigins("http://localhost:5173", "http://localhost:5174") hna dir endpoints dyal front
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(true);
     }
 @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
