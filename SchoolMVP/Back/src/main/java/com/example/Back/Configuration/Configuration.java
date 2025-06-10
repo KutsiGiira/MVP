@@ -27,19 +27,19 @@ public class Configuration implements WebMvcConfigurer {
         return http
                         .csrf(c -> c.disable())
                         .authorizeHttpRequests(req -> req
-                            .requestMatchers("/new-user", "/login").permitAll()
+                            .requestMatchers("/new-user", "/login", "/tests").permitAll()
                                 .requestMatchers("/admins/**").hasRole("ADMIN")
                                 .requestMatchers("/teachers/**").hasRole("TEACHER")
                                 .requestMatchers("/parents/**").hasRole("PARENT")
                                 .anyRequest().authenticated())
-//                                .userDetailsService(userDetailsService) fach t9ad login page 7yd commnt
+                                .userDetailsService(userDetailsService)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-//                .allowedOrigins("http://localhost:5173", "http://localhost:5174") hna dir endpoints dyal front
+                .allowedOrigins("http://localhost:8081")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);

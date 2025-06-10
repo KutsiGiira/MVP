@@ -17,12 +17,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 public class Controller {
     @Autowired
     LoginService loginService;
@@ -40,6 +38,10 @@ public class Controller {
     @GetMapping("/admins")
     public String adminEndpoint() {
         return "Welcome Admin!";
+    }
+    @GetMapping("/tests")
+    public String test() {
+        return "test!";
     }
     @PreAuthorize("hasRole('TEACHER')")
     @GetMapping("/teachers")
