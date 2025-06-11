@@ -52,9 +52,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         
         if (role && username && tokenInfo) {
           setUser({
+            ...tokenInfo,
             role,
-            username,
-            ...tokenInfo
+            username
           });
           setIsAuthenticated(true);
         } else {
@@ -85,9 +85,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         
         if (tokenInfo) {
           setUser({
+          ...tokenInfo,
             role: result.role,
             username: credentials.username,
-            ...tokenInfo
           });
           setIsAuthenticated(true);
         }

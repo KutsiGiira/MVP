@@ -54,7 +54,7 @@ export const authService = {
   },
 
   // Get decoded token info
-  getTokenInfo: async (): Promise<JWTPayload | null> => {
+  async getTokenInfo(): Promise<JWTPayload | null> {
     try {
       const token = await this.getToken();
       if (!token) return null;
@@ -68,7 +68,7 @@ export const authService = {
   },
 
   // Check if token is valid and not expired
-  isTokenValid: async (): Promise<boolean> => {
+  async isTokenValid(): Promise<boolean>{
     try {
       const token = await this.getToken();
       if (!token) return false;
@@ -88,7 +88,7 @@ export const authService = {
   },
 
   // Logout - clear all stored data
-  logout: async (): Promise<boolean> => {
+  async logout(): Promise<boolean> {
     try {
       await SecureStore.deleteItemAsync('userToken');
       await SecureStore.deleteItemAsync('userRole');
@@ -103,7 +103,7 @@ export const authService = {
   // Login function
   login: async (credentials: AuthRequest): Promise<AuthResponse> => {
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch('http://192.168.1.3:8080/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
@@ -145,10 +145,10 @@ export const authService = {
   },
 
   // Make authenticated API requests
-  makeAuthenticatedRequest: async (
+  async makeAuthenticatedRequest(
     url: string, 
     options: RequestInit = {}
-  ): Promise<Response> => {
+  ): Promise<Response> {
     const token = await this.getToken();
     if (!token) {
       throw new Error('No token available');
