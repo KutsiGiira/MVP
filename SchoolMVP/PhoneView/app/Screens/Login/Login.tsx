@@ -254,7 +254,6 @@ export default function Login({ navigation }: LoginProps) {
       setError('Veuillez remplir tous les champs');
       return;
     }
-
     setLoading(true);
     try {
       const response = await fetch('http://192.168.1.3:8080/login', {

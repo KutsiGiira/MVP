@@ -76,7 +76,7 @@ public class Controller {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
             String token = jwtutil.generateToken(userDetails);
-
+            System.out.println(token);
             return ResponseEntity.ok(token);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Wrong creds");
