@@ -8,8 +8,14 @@ import AdminPage from './Pages/Admin/AdminPage';
 import ParentPage from './Pages/Parent/ParentPage';
 import TeacherPage from './Pages/Teacher/TeacherPage';
 
-const Stack = createNativeStackNavigator();
+    export type RootStackParamList = {
+      Login: undefined;
+      AdminPage: undefined;
+      ParentPage: undefined;
+      TeacherPage: undefined;
+};
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <NavigationContainer>
