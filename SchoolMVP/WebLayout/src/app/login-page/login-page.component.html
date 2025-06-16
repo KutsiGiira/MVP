@@ -1,0 +1,8 @@
+<div class="flex items-center justify-center bg-[#00112A] w-screen h-screen text-white">
+    <form (ngSubmit)= "submitHandle()" [formGroup] = "form" class="flex flex-col gap-10">
+        <input type="text" placeholder="USERNAME" formControlName="username"class="border border-white">
+        <input type="text" placeholder="PASSWORD" formControlName="password"class="border border-white">
+        <span *ngIf="form.get('username')?.invalid || form.get('password')?.invalid" class="text-red-800">{{ errorText }}</span>
+        <button type="submit" class="bg-white text-black w-[100px] hover:bg-red-500">Submit</button>
+    </form>
+</div>
