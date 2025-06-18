@@ -1,1 +1,19 @@
 @import "tailwindcss";
+@font-face {
+  font-family: 'ultraLight';
+  src: url('/assets/fonts/FiraSans-UltraLight.otf') format('opentype');
+}
+@font-face {
+  font-family: 'book';
+  src: url('/assets/fonts/FiraSans-Book.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Medium';
+  src: url('/assets/fonts/FiraSans-Medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'SemiBold';
+  src: url('/assets/fonts/FiraSans-SemiBold.otf') format('opentype');
+}
+
+/* zid improvi fonts */

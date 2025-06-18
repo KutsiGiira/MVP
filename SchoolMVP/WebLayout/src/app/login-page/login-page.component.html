@@ -1,8 +1,16 @@
-<div class="flex items-center justify-center bg-[#00112A] w-screen h-screen text-white">
-    <form (ngSubmit)= "submitHandle()" [formGroup] = "form" class="flex flex-col gap-10">
-        <input type="text" placeholder="USERNAME" formControlName="username"class="border border-white">
-        <input type="text" placeholder="PASSWORD" formControlName="password"class="border border-white">
-        <span *ngIf="form.get('username')?.invalid || form.get('password')?.invalid" class="text-red-800">{{ errorText }}</span>
-        <button type="submit" class="bg-white text-black w-[100px] hover:bg-red-500">Submit</button>
+<div
+  class="flex items-center justify-center w-screen h-screen flex-col" id="LoginMainDiv">
+  <div class="text-center absolute top-[15%] text-white w-full">
+        <h1 class="text-5xl mb-6  ml-auto mr-auto" id="headTitle">BONJOUR ET BIENVENUE</h1>
+        <p  class="text-xl w-[25%]  ml-auto mr-auto" id="SubTitle">Accédez facilement à vos emplois du temps, examens, absences, notifications et à toutes les informations essentielles de la vie scolaire.</p>
+  </div>
+    <form (ngSubmit)= "submitHandle()" [formGroup] = "form" class="flex flex-col gap-5 w-[25%] h-[20%] items-center mt-20">
+        <h1 class="text-3xl mb-2" id="con">CONNEXION UTILISATEUR</h1>
+        <input type="text" placeholder="Nom d’utilisateur" formControlName="username"class="border border-white bg-[#c3d5e5] w-full rounded-full text-white p-2 pl-6 pr-6" id="inp">
+        <div class="w-full">
+        <input type="text" placeholder="Mot de passe" formControlName="password"class="border border-white bg-[#c3d5e5]  w-full rounded-full text-white p-2 pl-6 pr-6" id="inp">
+        <span *ngIf="form.get('username')?.invalid || form.get('password')?.invalid" class="text-red-800  ml-8">{{ errorText }}</span>
+        </div>
+        <button type="submit" class="bg-white text-white w-[100px] w-full p-2 rounded-full bg-gradient-to-r from-[#3d176b] to-[#4392e1] hover:bg-red-500" id="btn">SE CONNECTER</button>
     </form>
 </div>

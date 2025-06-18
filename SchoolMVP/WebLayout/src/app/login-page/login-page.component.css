@@ -1,0 +1,23 @@
+
+#headTitle{
+  font-family: 'ultraLight';
+}
+
+#LoginMainDiv {
+  background-image: url('/assets/last.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#SubTitle{
+  font-family: 'book';
+}
+#con{
+  font-family: 'SemiBold';
+}
+#inp{
+  font-family: 'Medium';
+}
+#btn{
+  font-family: 'Medium';
+}
