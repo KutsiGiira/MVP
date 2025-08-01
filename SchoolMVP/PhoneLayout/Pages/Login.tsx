@@ -1,23 +1,11 @@
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  ActivityIndicator,
-  Platform,
-} from "react-native";
+import { View,Text,TextInput,TouchableOpacity,StyleSheet,ScrollView,KeyboardAvoidingView,ActivityIndicator,Platform,} from "react-native";
 import { jwtDecode } from "jwt-decode";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { RootStackParamList } from "../App";
-import UsernameIcon from '../assets/Svg/test.svg';
-import PasswordIcon from '../assets/Svg/password.svg';
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useFonts } from 'expo-font';
 interface JwtPayload {
@@ -116,7 +104,7 @@ export default function Login({ navigation }: Props) {
             >
             
             </TextInput>
-                        {error && <Text style={styles.errorText}>{error}</Text>}
+            {error && <Text style={styles.errorText}>{error}</Text>}
             <View style={styles.bottom}>
             <LinearGradient colors={['#3d176b', '#4392e1']} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={styles.buttonHolder}>
               <TouchableOpacity onPress={HandleSubmit} disabled={loading}>
